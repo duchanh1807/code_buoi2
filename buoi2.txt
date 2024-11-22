@@ -1,0 +1,65 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace baitap_buoi2
+{
+    class Student
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Tạo danh sách học sinh
+            List<Student> students = new List<Student>
+            {
+                new Student { Id = 1, Name = "Duc",   Age = 13 },
+                new Student { Id = 2, Name = "Binh", Age = 18 },
+                new Student { Id = 3, Name = "Tin",  Age = 20},
+                new Student { Id = 4, Name = "Linh ",  Age = 19 },
+                new Student { Id = 5, Name = "Luan", Age = 17 },
+            };
+
+            // a. In danh sách toàn bộ học sinh
+            Console.WriteLine("Danh sach hoc sinh:");
+            students.ForEach(s => Console.WriteLine($"Id: {s.Id}, Name: {s.Name}, Age: {s.Age}"));
+
+            // b. Tìm học sinh có tuổi từ 15 đến 18
+            var age15to18 = students.Where(s => s.Age >= 15 && s.Age <= 18);
+            Console.WriteLine("\nHoc sinh co do tuoi tu 15 den 18:");
+            foreach (var s in age15to18)
+            {
+                Console.WriteLine($"Id: {s.Id}, Name: {s.Name}, Age: {s.Age}");
+            }
+
+            // c. Tìm học sinh có tên bắt đầu bằng "A"
+            var nameStartWithA = students.Where(s => s.Name.StartsWith("A"));
+            Console.WriteLine("\nHoc sinh co ten bat dau bang 'A':");
+            foreach (var s in nameStartWithA)
+            {
+                Console.WriteLine($"Id: {s.Id}, Name: {s.Name}, Age: {s.Age}");
+            }
+
+            // d. Tính tổng tuổi của tất cả học sinh
+            int totalAge = students.Sum(s => s.Age);
+            Console.WriteLine($"\nTong tuoi cua tat ca hoc sinh: {totalAge}");
+
+            // e. Tìm học sinh có tuổi lớn nhất
+            int maxAge = students.Max(s => s.Age);
+            var oldestStudent = students.First(s => s.Age == maxAge);
+            Console.WriteLine($"\nHoc sinh co tuoi lon nhat: Id: {oldestStudent.Id}, Name: {oldestStudent.Name}, Age: {oldestStudent.Age}");
+
+            // f. Sắp xếp danh sách theo tuổi tăng dần
+            var sortedStudents = students.OrderBy(s => s.Age).ToList();
+            Console.WriteLine("\nDanh sach sap xep theo tuoi tang dan:");
+            sortedStudents.ForEach(s => Console.WriteLine($"Id: {s.Id}, Name: {s.Name}, Age: {s.Age}"));
+
+        }
+    }
+}
+
